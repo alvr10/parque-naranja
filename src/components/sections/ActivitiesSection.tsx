@@ -24,11 +24,11 @@ const ActivityCard = ({ imageSrc, imageAlt, title, description, link }: {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black/60 to-transparent"></div>
       </div>
       <div className="p-6">
-        <h3 className="text-2xl font-extrabold mb-3 text-orange-600">{title}</h3>
-        <p className="text-orange-800 mb-5 font-medium">{description}</p>
+        <h3 className="text-2xl font-extrabold mb-3 text-[var(--secondary-color)]">{title}</h3>
+        <p className="text-[var(--primary-color)] mb-5 font-medium">{description}</p>
         <Link 
           href={link} 
-          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-all hover:scale-105"
+          className="bg-[var(--primary-color)] hover:bg-[var(--secondary-color)] text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-all hover:scale-105"
         >
           ¡Quiero jugar! 🎯
           <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,12 +69,12 @@ const ActivitiesSection = () => {
     <section className="py-16 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 md:mb-0 text-orange-800">
-            ¡Diversión <span className="text-orange-600">sin límites</span>!
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 md:mb-0 text-[var(--accent-color)]">
+            ¡Diversión <span className="text-[var(--secondary-color)]">sin límites</span>!
           </h2>
           <Link 
             href="/actividades" 
-            className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-all hover:scale-105"
+            className="bg-[var(--primary-color)] hover:bg-[var(--secondary-color)] text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition-all hover:scale-105"
           >
             Ver todas las actividades 🎪
             <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">

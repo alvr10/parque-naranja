@@ -81,7 +81,7 @@ const FeaturesSection: React.FC = () => {
         {/* Section Title with decorative elements */}
         <div className="text-center mb-16 relative">
           <h2 
-            className="text-3xl md:text-4xl font-bold relative inline-block"
+            className="text-3xl md:text-4xl font-bold relative text-[var(--secondary-color)] inline-block"
             dangerouslySetInnerHTML={{ __html: sectionTitle }}
           />
           <div className="w-24 h-1 bg-[var(--secondary-color)] mx-auto mt-4"></div>

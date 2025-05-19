@@ -15,12 +15,12 @@ const TestimonialCard: React.FC<TestimonialProps> = ({ quote, author, initials, 
       <div className="text-primary text-6xl font-serif -mt-6 mb-2">&quot;</div>
       <p className="text-gray-700 mb-6 italic">{quote}</p>
       <div className="flex items-center">
-        <div className="bg-primary h-12 w-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-sm">
+        <div className="bg-[var(--secondary-color)] h-12 w-12 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-sm">
           {initials}
         </div>
         <div className="ml-4">
           <h4 className="font-bold text-gray-800">{author}</h4>
-          <div className="flex text-yellow-400 mt-1">
+          <div className="flex text-[var(--accent-color)] mt-1">
             {[...Array(rating)].map((_, i) => (
               <svg key={i} className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
@@ -135,8 +135,8 @@ const TestimonialsSection: React.FC = () => {
   return (
     <section className="py-16 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Lo que dicen nuestros <span className="text-primary">clientes</span>
+        <h2 className="text-3xl md:text-4xl text-[var(--accent-color)] font-bold text-center mb-12">
+          Lo que dicen nuestros <span className="text-[var(--secondary-color)]">clientes</span>
         </h2>
         
         {isSmallScreen ? (

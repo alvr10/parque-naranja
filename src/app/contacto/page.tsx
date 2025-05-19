@@ -1,52 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
-import PrimaryButton from '@/components/ui/Button';
+import React from 'react';
+import ContactForm from '@/components/contact/ContactForm';
+import ContactInfo from '@/components/contact/ContactInfo';
+import ContactMap from '@/components/contact/ContactMap';
 import Link from 'next/link';
 import FAQ from '@/components/sections/FAQ';
 
 const ContactPage: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: 'Información General',
-    message: '',
-  });
-  
-  const [formStatus, setFormStatus] = useState<{
-    success?: boolean;
-    message?: string;
-  } | null>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Demo success message (replace with actual form submission)
-    setFormStatus({
-      success: true,
-      message: '¡Gracias por contactarnos! Te responderemos lo antes posible.'
-    });
-    
-    // Reset form after successful submission
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: 'Información General',
-        message: '',
-      });
-    }, 200);
-  };
-
   return (
     <div className="min-h-screen bg-orange-50/30">
       {/* Header Section with Decorative Element */}
@@ -71,227 +32,18 @@ const ContactPage: React.FC = () => {
 
       {/* Main Content */}
       <div className="container flex mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 gap-12 items-start">
           
           {/* Contact Form */}
-          <div className="bg-white rounded-xl shadow-lg p-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-orange-100 rounded-full opacity-50"></div>
-            <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-32 h-32 bg-orange-200 rounded-full opacity-30"></div>
-            
-            <div className="relative">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Envíanos un mensaje</h2>
-              
-              {formStatus && (
-                <div className={`p-4 rounded-lg mb-6 ${formStatus.success ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                  {formStatus.message}
-                </div>
-              )}
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Nombre completo *</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-colors"
-                      placeholder="Tu nombre"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Correo electrónico *</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-colors"
-                      placeholder="ejemplo@correo.com"
-                    />
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-colors"
-                      placeholder="Tu número de teléfono"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Asunto *</label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-colors"
-                    >
-                      <option value="Información General">Información General</option>
-                      <option value="Reservaciones">Reservaciones</option>
-                      <option value="Eventos Especiales">Eventos Especiales</option>
-                      <option value="Cumpleaños">Cumpleaños</option>
-                      <option value="Reclamación">Reclamación</option>
-                      <option value="Otro">Otro</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Mensaje *</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition-colors"
-                    placeholder="¿En qué podemos ayudarte?"
-                  ></textarea>
-                </div>
-                
-                <div className="flex justify-center md:justify-start">
-                  <PrimaryButton 
-                    text="Enviar Mensaje" 
-                    type="submit"
-                    icon={
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    }
-                    iconPosition="right"
-                  />
-                </div>
-              </form>
-            </div>
-          </div>
+          <ContactForm />
           
           {/* Contact Information */}
           <div className="space-y-8">
             {/* Info Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Location */}
-              <div className="bg-white rounded-xl shadow-sm p-6 flex items-start space-x-4 hover:shadow-md transition-shadow">
-                <div className="bg-orange-100 p-3 rounded-full">
-                  <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Ubicación</h3>
-                  <p className="text-gray-600">Calles Teniente Maximiliano Rodríguez y José María Peña esquina, Loja – Ecuador</p>
-                </div>
-              </div>
-              
-              {/* Phone */}
-              <div className="bg-white rounded-xl shadow-sm p-6 flex items-start space-x-4 hover:shadow-md transition-shadow">
-                <div className="bg-orange-100 p-3 rounded-full">
-                  <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Teléfono</h3>
-                  <p className="text-gray-600">Información y reservas:</p>
-                  <a href="tel:0982419136" className="text-orange-500 font-medium hover:text-orange-600 transition-colors">0982419136</a>
-                </div>
-              </div>
-              
-              {/* Email */}
-              <div className="bg-white rounded-xl shadow-sm p-6 flex items-start space-x-4 hover:shadow-md transition-shadow">
-                <div className="bg-orange-100 p-3 rounded-full">
-                  <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Correo Electrónico</h3>
-                  <a href="mailto:parquenaranja@gmail.com" className="text-orange-500 font-medium hover:text-orange-600 transition-colors">parquenaranja@gmail.com</a>
-                </div>
-              </div>
-              
-              {/* Hours */}
-              <div className="bg-white rounded-xl shadow-sm p-6 flex items-start space-x-4 hover:shadow-md transition-shadow">
-                <div className="bg-orange-100 p-3 rounded-full">
-                  <svg className="w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">Horario de Atención</h3>
-                  <p className="text-gray-600">Lunes a Viernes: 10:00 - 20:00</p>
-                  <p className="text-gray-600">Sábados y Domingos: 10:00 - 22:00</p>
-                </div>
-              </div>
-            </div>
+            <ContactInfo />
             
             {/* Map */}
-            <div className="bg-white rounded-xl shadow-lg p-4 overflow-hidden">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Nuestra Ubicación</h3>
-              
-              {/* Map container - Replace with your actual map embed code */}
-              <div className="relative w-full h-64 rounded-lg overflow-hidden">
-                {/* You could replace this with an actual Google Maps iframe */}
-                <div className="relative w-full h-full bg-gray-200">
-                  {/* Placeholder for map */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <p className="text-gray-500">
-                      {/* Replace with actual map embed */}
-                      <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.2059091573734!2d-79.20328432414589!3d-3.986650344541283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91cb47fc24447e91%3A0x28d6f42a6e4a3f8!2sLoja%2C%20Ecuador!5e0!3m2!1ses!2ses!4v1716204847813!5m2!1ses!2ses" 
-                        width="100%" 
-                        height="100%" 
-                        style={{ border: 0 }} 
-                        allowFullScreen 
-                        referrerPolicy="no-referrer-when-downgrade"
-                        title="Mapa de ubicación de Parque Naranja en Loja, Ecuador"
-                      ></iframe>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="mt-4 flex flex-wrap gap-2">
-                <a 
-                  href="https://goo.gl/maps/YOUR_ACTUAL_MAPS_LINK" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center text-sm text-orange-500 hover:text-orange-600 transition-colors"
-                >
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                  Ver en Google Maps
-                </a>
-                
-                <a 
-                  href="#" 
-                  className="inline-flex items-center text-sm text-orange-500 hover:text-orange-600 transition-colors"
-                >
-                  <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                  Cómo llegar
-                </a>
-              </div>
-            </div>
+            <ContactMap />
             
             {/* Social Media */}
             <div className="bg-white rounded-xl shadow-sm p-6">
